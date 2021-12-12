@@ -1,3 +1,4 @@
+
 # Pick a Movie
 
 This project is a 'Pick a Movie' app, which takes user inputs, and outputs a list of movies correspondingly. It first used BeautifulSoup to scrape information from [IMDb Top 250 movies](https://www.imdb.com/chart/top/?ref_=nv_mv_250), and manage information using caches. The data structure applied is graph structure. The interaction is realized through Flask app.
@@ -7,6 +8,7 @@ This project is a 'Pick a Movie' app, which takes user inputs, and outputs a lis
 This project requires Flask, request, render\_template from flask only, if you are a user.
 
 However, if you want to reproduce the scraping, you also need BeautifulSoup from bs4, and requests.
+
 You might install them all using the this command.
 
 ```
@@ -15,10 +17,14 @@ pip install -r requirements.txt
 
 ## How to use this app
 
+Download all files in this repository except 'scraper.py' if you just want to use the app.
+
+If you want to reproduce the scraping, download 'scraper.py' as well.
+ 
 After installing the packages, open 'interface.py' in terminal.
 
 ```
-python interface.pt
+python interface.py
 ```
 
 Then go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) on your browser.
