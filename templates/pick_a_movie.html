@@ -1,0 +1,162 @@
+<!-- #######
+SI507 Final Project
+Pick a Movie for Tonight
+Name: Yang Shen
+Uniqname: lizshen
+#########-->
+
+<html>
+
+<head>
+	<title>Pick a Movie</title>
+
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
+	<style>
+		body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}.w3-bar-block.w3-bar-item {padding:20px}
+	</style>
+</head>
+
+
+<body>
+
+<!-- !Sidebar (hidden by default) -->
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
+	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">Close Menu</a>
+  	<a href="https://www.si.umich.edu/programs/courses/507" onclick="w3_close()" class="w3-bar-item w3-button">SI 507 Course Info</a>
+  	<a href="https://www.imdb.com/chart/top/?ref_=nv_mv_250" onclick="w3_close()" class="w3-bar-item w3-button">IMDb Top 250 Movies</a>
+</nav>
+
+
+<!-- !Title -->
+<div class="w3-top">
+	<div class="w3-black w3-xlarge" style="max-width:1200px;margin:auto">
+    	<div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
+    	<div class="w3-center w3-padding-16">Pick a Movie</div>
+  	</div>
+</div>
+
+<!-- !PAGE CONTENT -->
+<div class="w3-main w3-content w3-padding" style="max-width:1200px;margin-top:50px">
+	<div class="w3-container w3-padding-32 w3-center">
+      	<h4><b>How to Use This App</b></h4>
+		<p>You can enter multiple conditions below, and we will give you a movie list from <a href=https://www.imdb.com/chart/top/?ref_=nv_mv_250>IMDb Top 250 movies</a>.<br />If you don't have preferences for certain features, just leave them blank!</p>
+
+	<!-- !FORM -->
+	<form action="/handle_form" method="POST">
+
+		<p><b>Choose a year range you prefer:</b><br/>
+			<select name="from_year">
+				<option value="----">----</option>
+				{% for year in range(1921, 2022) %}
+					<option value="{{year}}">{{year}}</option>
+				{% endfor %}
+			</select>
+			-
+			<select name="to_year">
+				<option value="----">----</option>
+				{% for year in range(1921, 2022) %}
+					<option value="{{year}}">{{year}}</option>
+				{% endfor %}
+			</select></p>
+
+
+		<p><b>Choose a genre/genres you prefer:</b><br/>
+			<input type="checkbox" name=Action> Action
+			<input type="checkbox" name=Adventue> Adventure
+			<input type="checkbox" name=Animation> Animation
+			<input type="checkbox" name=Biography> Biography
+			<input type="checkbox" name=Comedy> Comedy
+			<input type="checkbox" name=Crime> Crime
+			<input type="checkbox" name=Drama> Drama
+			<input type="checkbox" name=Family> Family
+			<input type="checkbox" name=Fantasy> Fantasy
+			<input type="checkbox" name=Film-Noir> Film-Noir
+			<input type="checkbox" name=Comedy> Comedy
+			<input type="checkbox" name=Crime> Crime
+			<input type="checkbox" name=Drama> Drama
+			<input type="checkbox" name=Family> Family
+			<input type="checkbox" name=Fantasy> Fantasy
+			<input type="checkbox" name=Film-Noir> Film-Noir
+			<input type="checkbox" name=History> History
+			<input type="checkbox" name=Horror> Horror
+			<input type="checkbox" name=Music> Music
+			<input type="checkbox" name=Musical> Musical
+			<input type="checkbox" name=Mystery> Mystery
+			<input type="checkbox" name=Romance> Romance
+			<input type="checkbox" name=Sci-Fi> Sci-Fi
+			<input type="checkbox" name=Sport> Sport
+			<input type="checkbox" name=Thriller> Thriller
+			<input type="checkbox" name=War> War
+			<input type="checkbox" name=Western> Western
+		</p>
+
+		<p><b>Choose a classification/classifications you prefer:</b><br/>
+			<input type="checkbox" name='R'> R
+			<input type="checkbox" name='PG-13'> PG-13
+    		<input type="checkbox" name='Approved'> Approved
+    		<input type="checkbox" name='PG'> PG
+			<input type="checkbox" name='Not Rated'> Not Rated
+    		<input type="checkbox" name='G'> G
+    		<input type="checkbox" name='Passed'> Passed
+    		<input type="checkbox" name='TV-PG'> TV-PG
+			<input type="checkbox" name='PG'> PG
+			<input type="checkbox" name='Unrated'> Unrated
+    		<input type="checkbox" name='X'> X
+    		<input type="checkbox" name='M'> M
+			<input type="checkbox" name='GP'> GP
+			<input type="checkbox" name='TV-MA'> TV-MA
+		</p>
+
+
+		<p><b>Choose a length range/ranges you prefer:</b><br/>
+			<input type="checkbox" name='Less than 1 hour'> Less than 1 hour<br/>
+			<input type="checkbox" name='Less than 2 hours'> Less than 2 hours<br/>
+			<input type="checkbox" name='Less than 3 hours'> Less than 3 hours<br/>
+			<input type="checkbox" name='3 hours and above'> 3 hours and above<br/>
+		</p>
+
+		<p><b>Choose a rating(out of 10) range/ranges you prefer:</b><br/>
+			<input type="checkbox" name='Below 8'> Below 8
+			<input type="checkbox" name=8-9> 8-9
+			<input type="checkbox" name=9-10> 9-10
+		</p>
+
+		<p><b>Enter the name/names of the director/directors, writer/writers, and star/stars:</b>
+		<p> Note: If you enter multiple ones, separate them using comma only.</p>
+		Director / Directors: <input name="Directors" type="text" placeholder="e.g. Stanley Kubrick"/><br/><br/>
+		Writer / Writers: <input name="Writers" type="text" placeholder="e.g. Stephen King"/><br/><br/>
+		Star / Stars: <input name="Stars" type="text" placeholder="e.g. Natalie Portman"/><br/><br/>
+		<p>We only show you the intersection of your conditions! Don't be too strict, or you'll have no movie to watch tonight! Haha!</p>
+
+		<input type="submit" value="Submit Form"/>
+	</form>
+	</div>
+</div>
+
+<!-- Footer -->
+<footer class="w3-padding-16 w3-black w3-center w3-margin-top">
+  <h6><i>About Me</i></h6>
+	Yang Shen<br/>
+	lizshen@umich.edu<br/>
+	School of Information<br/>
+	University of Michigan<br/>
+  <p>This is a course project for <a href="https://www.si.umich.edu/programs/courses/507" target="_blank" class="w3-hover-text-green">SI 507</a>.</p>
+</footer>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+}
+</script>
+
+
+</body>
+</html>
