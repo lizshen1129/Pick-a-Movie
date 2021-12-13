@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
-from handle_form import get_inputs, handle_years, handle_multiples_one_type, handle_all_intersection
-from graph import load_graph, save_graph, result_dict
+from handle_form import get_inputs, handle_years, handle_multiples_one_type, handle_all_intersection, result_dict
+from load_save_graph import load_graph, save_graph
 import random
 
 app = Flask(__name__)
