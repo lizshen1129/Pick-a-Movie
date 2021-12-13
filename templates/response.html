@@ -44,6 +44,8 @@ Uniqname: lizshen
         {% if rand%}
             <h5><b>No matches in our Top 250 movies.<br/>
                 But check these out, you might like them!</b></h5>
+        {% elif categ%}
+        <h5><b>Here are some {{categ}} movies just for you...</b></h5><br/>
         {% else %}
         <h5><b>Here are the movie list made just for you...</b></h5><br/>
         {% endif %}
