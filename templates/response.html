@@ -99,9 +99,21 @@ Uniqname: lizshen
                         <div class="w3-container">
                         <div class="w3-large w3-center"><br/><b><a href={{result['URL'][i]}}>{{result['Title'][i]}}</a></b></div>
                         <div class="w3-center">{{result['Year'][i]}} · {{result['Classification'][i]}} · {{result['Length'][i]}}</div>
+
                         <div class="w3-left">
                             <br/>
                             <b>IMDb Rating:</b> {{result['Rating'][i]}} / 10<br/>
+                            {% if result['Genres'][i]|length == 1 %}
+                                <b>Genre </b> {{result['Genres'][i][0]}}<br/>
+                            {% else %}
+                                <b>Genres </b>
+                                {% for genre in result['Genres'][i] %}
+                                    {{genre}}
+                                    {{ " · " if not loop.last else "" }}
+                                {% endfor %}
+                                <br/>
+                            {% endif %}
+
                             {% if result['Directors'][i]|length == 1 %}
                                 <b>Director </b> {{result['Directors'][i][0]}}<br/>
                             {% else %}
@@ -152,6 +164,18 @@ Uniqname: lizshen
                         <div class="w3-left">
                             <br/>
                             <b>IMDb Rating:</b> {{result['Rating'][i]}} / 10<br/>
+
+                            {% if result['Genres'][i]|length == 1 %}
+                                <b>Genre </b> {{result['Genres'][i][0]}}<br/>
+                            {% else %}
+                                <b>Genres </b>
+                                {% for genre in result['Genres'][i] %}
+                                    {{genre}}
+                                    {{ " · " if not loop.last else "" }}
+                                {% endfor %}
+                                <br/>
+                            {% endif %}
+
                             {% if result['Directors'][i]|length == 1 %}
                                 <b>Director </b> {{result['Directors'][i][0]}}<br/>
                             {% else %}
@@ -202,6 +226,18 @@ Uniqname: lizshen
                         <div class="w3-left">
                             <br/>
                             <b>IMDb Rating:</b> {{result['Rating'][i]}} / 10<br/>
+
+                            {% if result['Genres'][i]|length == 1 %}
+                                <b>Genre </b> {{result['Genres'][i][0]}}<br/>
+                            {% else %}
+                                <b>Genres </b>
+                                {% for genre in result['Genres'][i] %}
+                                    {{genre}}
+                                    {{ " · " if not loop.last else "" }}
+                                {% endfor %}
+                                <br/>
+                            {% endif %}
+
                             {% if result['Directors'][i]|length == 1 %}
                                 <b>Director </b> {{result['Directors'][i][0]}}<br/>
                             {% else %}
