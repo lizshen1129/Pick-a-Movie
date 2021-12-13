@@ -50,9 +50,15 @@ def category(categ):
             categ = categ[2:] + 's'
         result_list = year_list
     except:
+        if categ == 'random':
+            result_list = [random.randint(0, 249) for _ in range(9)]
+            result = result_dict(result_list)
+            categ = '9 random'
+            return render_template('response.html', result=result, rand=False, categ=categ, genres=genres)
         for vert in verts:
             if vert.getValue() == categ:
                 result_list = vert.getConnections()
+
     if not result_list:
         result_list = [random.randint(0, 249) for _ in range(9)]
         rand = True
