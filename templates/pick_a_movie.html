@@ -99,33 +99,12 @@ Uniqname: lizshen
 
 
 		<p><b>Choose a genre/genres you prefer:</b><br/>
-			<input type="checkbox" name=Action> Action
-			<input type="checkbox" name=Adventue> Adventure
-			<input type="checkbox" name=Animation> Animation
-			<input type="checkbox" name=Biography> Biography
-			<input type="checkbox" name=Comedy> Comedy
-			<input type="checkbox" name=Crime> Crime<br/>
-			<input type="checkbox" name=Drama> Drama
-			<input type="checkbox" name=Family> Family
-			<input type="checkbox" name=Fantasy> Fantasy
-			<input type="checkbox" name=Film-Noir> Film-Noir
-			<input type="checkbox" name=Comedy> Comedy
-			<input type="checkbox" name=Crime> Crime
-			<input type="checkbox" name=Drama> Drama<br/>
-			<input type="checkbox" name=Family> Family
-			<input type="checkbox" name=Fantasy> Fantasy
-			<input type="checkbox" name=Film-Noir> Film-Noir
-			<input type="checkbox" name=History> History
-			<input type="checkbox" name=Horror> Horror
-			<input type="checkbox" name=Music> Music
-			<input type="checkbox" name=Musical> Musical<br/>
-			<input type="checkbox" name=Mystery> Mystery
-			<input type="checkbox" name=Romance> Romance
-			<input type="checkbox" name=Sci-Fi> Sci-Fi
-			<input type="checkbox" name=Sport> Sport
-			<input type="checkbox" name=Thriller> Thriller
-			<input type="checkbox" name=War> War
-			<input type="checkbox" name=Western> Western
+			{% for genre in genres %}
+				<input type="checkbox" name={{genre}}> {{genre}}
+				{% if genre == 'Film-Noir' %}
+					<br/>
+				{% endif %}
+			{% endfor %}
 		</p>
 
 		<p><b>Choose a classification/classifications you prefer:</b><br/>
@@ -135,7 +114,7 @@ Uniqname: lizshen
     		<input type="checkbox" name='PG'> PG
 			<input type="checkbox" name='Not Rated'> Not Rated
     		<input type="checkbox" name='G'> G
-    		<input type="checkbox" name='Passed'> Passed<br/>
+    		<input type="checkbox" name='Passed'> Passed
     		<input type="checkbox" name='TV-PG'> TV-PG
 			<input type="checkbox" name='PG'> PG
 			<input type="checkbox" name='Unrated'> Unrated
