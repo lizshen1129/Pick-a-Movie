@@ -28,7 +28,38 @@ def handle_the_form():
     else:
         rand = False
     result = result_dict(result_list)
-    return render_template('response.html', result=result, rand=rand)
+    return render_template('response.html', result=result, rand=rand, categ=None)
+
+@app.route('/<categ>')
+def category(categ):
+    g = load_graph()
+    save_graph(g)
+    verts = g.getVerts()
+    result_list = []
+    try:
+        year = int(categ)
+        if year == 2000:
+            year_list = handle_years('2000', '2010', g)
+            categ = '2000~2010'
+        elif year == 2011:
+            year_list = handle_years('2011', '2021', g)
+            categ = '2011~2021'
+        else:
+            year_list = handle_years(str(year), str(year + 9), g)
+            result_list = year_list
+            categ = categ[2:] + 's'
+        result_list = year_list
+    except:
+        for vert in verts:
+            if vert.getValue() == categ:
+                result_list = vert.getConnections()
+    if not result_list:
+        result_list = [random.randint(0, 249) for _ in range(9)]
+        rand = True
+    else:
+        rand = False
+    result = result_dict(result_list)
+    return render_template('response.html', result=result, rand=rand, categ=categ)
 
 
 if __name__ == '__main__':  
