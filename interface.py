@@ -37,6 +37,7 @@ def handle_the_form():
 def category(categ):
     result_list = []
     try:
+        # If it is a year
         year = int(categ)
         if year == 2000:
             year_list = handle_years('2000', '2010', g)
@@ -50,14 +51,21 @@ def category(categ):
             categ = categ[2:] + 's'
         result_list = year_list
     except:
+        # If it is random
         if categ == 'random':
             result_list = [random.randint(0, 249) for _ in range(9)]
             result = result_dict(result_list)
             categ = '9 random'
             return render_template('response.html', result=result, rand=False, categ=categ, genres=genres)
+
+        # If it is director/writer/star, categ needed to be adjusted.
+        # e.g. categ is 'Natalie_Portman', I need to make it 'Natalie Portman'.
+        if categ not in genres:
+            categ = ' '.join(categ.split('_'))
+
         for vert in verts:
             if vert.getValue() == categ:
-                result_list = vert.getConnections()
+                result_list += vert.getConnections()
 
     if not result_list:
         result_list = [random.randint(0, 249) for _ in range(9)]
@@ -66,7 +74,6 @@ def category(categ):
         rand = False
     result = result_dict(result_list)
     return render_template('response.html', result=result, rand=rand, categ=categ, genres=genres)
-
 
 if __name__ == '__main__':  
     print('starting Flask app', app.name)
