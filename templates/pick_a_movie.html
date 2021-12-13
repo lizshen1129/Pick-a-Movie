@@ -23,18 +23,50 @@ Uniqname: lizshen
 <body>
 
 <!-- !Sidebar (hidden by default) -->
-<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-xlarge w3-animate-left" style="display:none;z-index:2;width:40%;min-width:300px" id="mySidebar">
-	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button">Close Menu</a>
-  	<a href="https://www.si.umich.edu/programs/courses/507" onclick="w3_close()" class="w3-bar-item w3-button">SI 507 Course Info</a>
-  	<a href="https://www.imdb.com/chart/top/?ref_=nv_mv_250" onclick="w3_close()" class="w3-bar-item w3-button">IMDb Top 250 Movies</a>
-</nav>
+<nav class="w3-sidebar w3-bar-block w3-card w3-top w3-animate-left" style="display:none;z-index:2;width:20%" id="mySidebar">
+	<a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-grey w3-large">Close Menu</a>
+	<div class="w3-dropdown-hover">
+    	<button class="w3-button w3-large">Genres</button>
+    	<div class="w3-dropdown-content w3-bar-block">
+			{% for genre in genres %}
+				<a href="http://127.0.0.1:5000/{{genre}}" class="w3-bar-item w3-button">{{genre}}</a>
+			{% endfor %}
+    	</div>
+    </div>
+	<div class="w3-dropdown-hover">
+    	<button class="w3-button w3-large">Ages</button>
+    	<div class="w3-dropdown-content w3-bar-block">
+			{% for age in [1920, 1930, 1940, 1950, 1960, 1970, 1980, 1990, 2000, 2011] %}
+				<a href="http://127.0.0.1:5000/{{age}}" class="w3-bar-item w3-button">
+					{% if age == 2000 %}
+						2000-2010
+					{% elif age == 2011 %}
+						2011-2021
+					{% else %}
+						{{(age | string)[2:]+'s'}}
+					{% endif %}
+				</a>
+			{% endfor %}
+    	</div>
+    </div>
+	<div class="w3-dropdown-hover">
+    	<button class="w3-button w3-large">About</button>
+    	<div class="w3-dropdown-content w3-bar-block">
+			<a href="https://www.si.umich.edu/programs/courses/507" onclick="w3_close()" class="w3-bar-item w3-button">SI 507 Course Info</a>
+  			<a href="https://www.imdb.com/chart/top/?ref_=nv_mv_250" onclick="w3_close()" class="w3-bar-item w3-button">IMDb Top 250 Movies</a>
+			<a href="#about" onclick="w3_close()" class="w3-bar-item w3-button">About Me</a>
+    	</div>
+    </div>
+  </nav>
 
 
 <!-- !Title -->
 <div class="w3-top">
 	<div class="w3-black w3-xlarge">
     	<div class="w3-button w3-padding-16 w3-left" onclick="w3_open()">☰</div>
-    	<div class="w3-center w3-padding-16">Pick a Movie</div>
+    	<div class="w3-center w3-padding-16">
+			<a href="http://127.0.0.1:5000/" style="text-decoration: none">Pick a Movie</a>
+		</div>
   	</div>
 </div>
 
@@ -136,17 +168,20 @@ Uniqname: lizshen
 	</div>
 </div>
 
-</body>
 
 <!-- Footer -->
+
 <footer class="w3-padding-16 w3-black w3-center w3-margin-top">
-  <h6><i>About Me</i></h6>
-	Yang Shen<br/>
-	lizshen@umich.edu<br/>
-	School of Information<br/>
-	University of Michigan<br/>
-  <p>This is a course project for <a href="https://www.si.umich.edu/programs/courses/507" target="_blank" class="w3-hover-text-green">SI 507</a>.</p>
+	<hr id="about">
+  	<h6><i>About Me</i></h6>
+		Yang Shen<br/>
+		lizshen@umich.edu<br/>
+		School of Information<br/>
+		University of Michigan<br/>
+  	<p>This is a course project for <a href="https://www.si.umich.edu/programs/courses/507" target="_blank" class="w3-hover-text-green">SI 507</a>.</p>
+	<hr>
 </footer>
+
 
 <script>
 // Script to open and close sidebar
@@ -158,5 +193,8 @@ function w3_close() {
   document.getElementById("mySidebar").style.display = "none";
 }
 </script>
+
+
+</body>
 
 </html>
