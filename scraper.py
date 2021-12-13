@@ -1,27 +1,8 @@
 import requests
-import json
 import time
+import json
 from bs4 import BeautifulSoup
-
-
-def save_movies(movies):
-    json_file = open(MOVIES_DICT_NAME, "w")
-    json.dump(movies, json_file)
-    json_file.close()
-
-
-def movies_append(movies, title, year, classification, length, rating, genres, directors, writers, stars, url, img):
-    movies['Title'].append(title)
-    movies['Year'].append(year)
-    movies['Classification'].append(classification)
-    movies['Length'].append(length)
-    movies['Rating'].append(rating)
-    movies['Genres'].append(genres)
-    movies['Directors'].append(directors)
-    movies['Writers'].append(writers)
-    movies['Stars'].append(stars)
-    movies['URL'].append(url)
-    movies['img'].append(img)
+from load_save_movies import save_movies
 
 
 def load_cache():
@@ -118,6 +99,20 @@ def scrape_detail(movie_listing_tr, movies, cache_dict):
                   movie_details_url, img)
 
 
+def movies_append(movies, title, year, classification, length, rating, genres, directors, writers, stars, url, img):
+    movies['Title'].append(title)
+    movies['Year'].append(year)
+    movies['Classification'].append(classification)
+    movies['Length'].append(length)
+    movies['Rating'].append(rating)
+    movies['Genres'].append(genres)
+    movies['Directors'].append(directors)
+    movies['Writers'].append(writers)
+    movies['Stars'].append(stars)
+    movies['URL'].append(url)
+    movies['img'].append(img)
+
+
 def scrape():
     cache_dict = load_cache()
     movies_page_url = BASE_URL + MOVIES_PATH
@@ -133,6 +128,7 @@ def scrape():
         scrape_detail(movie_listing_tr, movies, cache_dict)
     save_movies(movies)
     save_cache(cache_dict)
+
 
 BASE_URL = 'https://www.imdb.com'
 MOVIES_PATH = '/chart/top/?ref_=nv_mv_250'
