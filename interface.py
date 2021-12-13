@@ -33,6 +33,19 @@ def handle_the_form():
     result = result_dict(result_list)
     return render_template('response.html', result=result, rand=rand, categ=None, genres=genres)
 
+@app.route('/people')
+def people():
+    ppl = {}
+    for vert in verts:
+        if vert.getFeature() == 'Directors' or vert.getFeature() == 'Writers' or vert.getFeature() == 'Stars':
+            if vert.getValue() in ppl.keys():
+                ppl[vert.getValue()].append(vert.getFeature()[:-1])
+            else:
+                ppl[vert.getValue()] = [vert.getFeature()[:-1]]
+    ppl_list = sorted(ppl.keys())
+    print(ppl_list)
+    return render_template('people.html', ppl=ppl, ppl_list=ppl_list)
+
 @app.route('/<categ>')
 def category(categ):
     result_list = []
@@ -58,14 +71,10 @@ def category(categ):
             categ = '9 random'
             return render_template('response.html', result=result, rand=False, categ=categ, genres=genres)
 
-        # If it is director/writer/star, categ needed to be adjusted.
-        # e.g. categ is 'Natalie_Portman', I need to make it 'Natalie Portman'.
-        if categ not in genres:
-            categ = ' '.join(categ.split('_'))
-
         for vert in verts:
             if vert.getValue() == categ:
                 result_list += vert.getConnections()
+                result_list = list(set(result_list))
 
     if not result_list:
         result_list = [random.randint(0, 249) for _ in range(9)]
