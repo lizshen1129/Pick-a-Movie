@@ -36,3 +36,13 @@ After you are done, click on 'Submit Form', and you will be directed to the resu
 Notice that the conditions of the same attributes will be taken the union. For example, if you choose Crime and Horror, it will search for movies in crime or horror genre (or both). But conditions across attributes will be taken the intersection. For example, if you choose Crime (genre) and R (classification), it will only search for crime movies rated as R movies.
 
 Have fun!
+
+## Data structure
+
+I used graph structure in this project, because many fields in the movie information are multiple ones. For example, usually there are many genres and stars for one movie.
+
+Basically I generate vertexes of a graph by going through the movie information in 'movies.json' one by one. Every vertex is a value of one attribute, for example, 1989 is a year vertex, crime is a genre vertex, and Gary Oldman is a star vertex. Every time a movie 's feature matches with some vertex, its id will be added to the vertex's connectedTo list; else if no matches, a new vertex will be constructed.
+
+Once the graph is generated and saved in graph.json, it is easy to find some certain vertex and its connected movies' ids, and retrieve movie information from 'movie.json'.
+
+Vertexes are saved in 'graph.json' like this: 'value>>type': [movies it connects to]. For example, 'Stanley Kubrick>>Directors': [58, 63, 65, 87, 103, 110, 198].
