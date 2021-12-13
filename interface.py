@@ -3,16 +3,19 @@ from handle_form import get_inputs, handle_years, handle_multiples_one_type, han
 from load_save_graph import load_graph, save_graph
 import random
 
+g = load_graph()
+verts = g.getVerts()
+genres = [vert.getValue() for vert in verts if vert.getFeature() == 'Genres']
+genres.sort()
+
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('pick_a_movie.html')
+    return render_template('pick_a_movie.html', genres=genres)
 
 @app.route('/handle_form', methods=['POST'])
 def handle_the_form():
-    g = load_graph()
-    save_graph(g)
     input_dict = get_inputs(request.form)
     year_list = handle_years(input_dict['from_year'], input_dict['to_year'], g)
     list_of_lists = [year_list]
@@ -28,13 +31,10 @@ def handle_the_form():
     else:
         rand = False
     result = result_dict(result_list)
-    return render_template('response.html', result=result, rand=rand, categ=None)
+    return render_template('response.html', result=result, rand=rand, categ=None, genres=genres)
 
 @app.route('/<categ>')
 def category(categ):
-    g = load_graph()
-    save_graph(g)
-    verts = g.getVerts()
     result_list = []
     try:
         year = int(categ)
@@ -59,7 +59,7 @@ def category(categ):
     else:
         rand = False
     result = result_dict(result_list)
-    return render_template('response.html', result=result, rand=rand, categ=categ)
+    return render_template('response.html', result=result, rand=rand, categ=categ, genres=genres)
 
 
 if __name__ == '__main__':  
