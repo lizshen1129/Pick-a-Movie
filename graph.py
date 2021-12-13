@@ -1,4 +1,4 @@
-import json
+from load_save_movies import load_movies
 
 
 class Vertex:
@@ -44,49 +44,6 @@ class Graph():
         return self.vertList
 
 
-def load_graph():
-    try:
-        graph_file = open(GRAPH_FILE_NAME, 'r')
-        graph = graph_file.read()
-        graph_dict = json.loads(graph)
-        graph_file.close()
-        verts = []
-        for key in graph_dict.keys():
-            value = key.split('>>')[0]
-            feature = key.split('>>')[1]
-            new_vert = Vertex(value, 0, feature)
-            new_vert.setNeighbors(graph_dict[key])
-            verts.append(new_vert)
-        g = Graph(verts)
-    except:
-        g = generate_graph()
-    return g
-
-
-
-def save_graph(graph):
-    graph_dict = {}
-    for vert in graph.getVerts():
-        graph_dict[vert.getValue() + '>>' + vert.getFeature()] = vert.getConnections()
-
-    graph_file = open(GRAPH_FILE_NAME, 'w')
-    graph_to_write = json.dumps(graph_dict)
-    graph_file.write(graph_to_write)
-    graph_file.close()
-
-
-def load_movies():
-    try:
-        movies_file = open(MOVIES_DICT_NAME, 'r')
-        movies = movies_file.read()
-        movies_dict = json.loads(movies)
-
-        movies_file.close()
-    except:
-        movies_dict = {}
-    return movies_dict
-
-
 def filter(condition, verts):
     by_condition = []
     for vert in verts:
@@ -94,18 +51,6 @@ def filter(condition, verts):
             by_condition = vert.getConnections()
             break
     return by_condition
-
-
-def result_dict(movie_ids):
-    if movie_ids is None:
-        return
-    result = {'Title': [], 'Year': [], 'Classification': [], 'Length': [], 'Rating': [], 'Genres': [], 'Directors': [],
-              'Writers': [], 'Stars': [], 'URL': [], 'img': []}
-    for movie_id in movie_ids:
-        movie_id = int(movie_id)
-        for key in MOVIES_DICT.keys():
-            result[key].append(MOVIES_DICT[key][movie_id])
-    return result
 
 
 def generate_length_verts(movies_graph, feature, movie_id):
@@ -150,13 +95,3 @@ MOVIES_DICT_NAME = 'movies.json'
 MOVIES_LIST_LENGTH = 250
 MOVIES_DICT = load_movies()
 GRAPH_FILE_NAME = 'graph.json'
-
-
-'''
-
-# Generate the graph and save it to local file, 'graph.json'.
-
-g = load_graph()
-save_graph(g)
-
-'''
