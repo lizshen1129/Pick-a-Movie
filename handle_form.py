@@ -1,5 +1,6 @@
 from graph import *
 
+
 def get_inputs(request_form):
     l_type = ['Less than 1 hour', 'Less than 2 hours', 'Less than 3 hours', '3 hours and above']
     r_type = ['Below 8', '8-9', '9-10']
@@ -79,3 +80,15 @@ def handle_all_intersection(union_lists):
         intersection = list(set(union_list) & set(intersection))
     if intersection:
         return intersection
+
+
+def result_dict(movie_ids):
+    if movie_ids is None:
+        return
+    result = {'Title': [], 'Year': [], 'Classification': [], 'Length': [], 'Rating': [], 'Genres': [], 'Directors': [],
+              'Writers': [], 'Stars': [], 'URL': [], 'img': []}
+    for movie_id in movie_ids:
+        movie_id = int(movie_id)
+        for key in MOVIES_DICT.keys():
+            result[key].append(MOVIES_DICT[key][movie_id])
+    return result
