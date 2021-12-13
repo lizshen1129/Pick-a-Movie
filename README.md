@@ -29,13 +29,33 @@ python interface.py
 
 Then go to [http://127.0.0.1:5000/](http://127.0.0.1:5000/) on your browser.
 
+### Movies list by your conditions
+
 You will see the index page of Pick a Movie, where you can enter your preferences about years, genres, ratings, etc..
 
-After you are done, click on 'Submit Form', and you will be directed to the result page, where a list of movies is shown according to your preferences.
+After you are done, click on 'Submit Form', and you will be directed to the result page, where a list of movies is shown according to your preferences. If you click on a movie's title, you will be redirected to the movie's IMDb page.
 
 Notice that the conditions of the same attributes will be taken the union. For example, if you choose Crime and Horror, it will search for movies in crime or horror genre (or both). But conditions across attributes will be taken the intersection. For example, if you choose Crime (genre) and R (classification), it will only search for crime movies rated as R movies.
 
-Have fun!
+You can always click 'Pick a Movie' at the top to come back to this index page.
+
+### Random 9 movies
+
+If you click the sidebar button, you will see a button 'Random 9'. By clicking it, you will get a movie list of 9 random movies.
+
+### Browse by people
+
+If you click the sidebar button, you will see a button 'People'. By clicking it, you will be redirected to a page of people names. Once you click on someone's name, a list of movies this person has participated in will be listed.
+
+### Browse by genres or ages
+
+If you click the sidebar button, you will see a button 'Genres'. Hover on it and a dropdown list of genres will be shown. Once you click on some genre, a list of movies of this genre will be listed.
+
+Same with ages.
+
+### About
+
+If you click the sidebar button, you will see a button 'About'. Hover on it and a dropdown list of information links will be shown. Click on it and you will be directed to the corresponding page.
 
 ## Data structure
 
